@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Action Buttons</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: 'Verdana', sans-serif;
+            color: #333;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .button {
+            padding: 15px 20px;
+            font-size: 16px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notification {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            font-size: 14px;
+            animation: fadeout 5s forwards;
+        }
+
+        @keyframes fadeout {
+            0% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(20px); }
+        }
+
+        /* Button 1: Neon Glowing */
+        .button-1 {
+            background-color: #e91e63;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            box-shadow: 0 0 20px #e91e63, 0 0 40px #e91e63, 0 0 60px #e91e63, 0 0 80px #e91e63;
+            text-shadow: 0 0 10px white;
+            border-radius: 10px;
+        }
+
+        /* Button 2: Animated Gradient Border */
+        .button-2 {
+            background-color: transparent;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            border: 4px solid;
+            border-image-slice: 1;
+            border-width: 4px;
+            border-image-source: linear-gradient(45deg, #f3ec78, #af4261);
+            transition: all 0.4s ease;
+            border-radius: 15px;
+        }
+
+        .button-2:hover {
+            background-image: linear-gradient(45deg, #f3ec78, #af4261);
+            color: white;
+        }
+
+        /* Button 3: Animated Pulse */
+        .button-3 {
+            background-color: #3498db;
+            color: white;
+            font-family: 'Courier New', monospace;
+            border-radius: 50px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Button 4: 3D Animated Button */
+        .button-4 {
+            background-color: #8e44ad;
+            color: white;
+            font-family: 'Helvetica', sans-serif;
+            border-radius: 5px;
+            box-shadow: 0 5px #71368a;
+            transition: all 0.3s ease;
+        }
+
+        .button-4:active {
+            transform: translateY(5px);
+            box-shadow: 0 2px #71368a;
+        }
+
+        /* Button 5: Rainbow Text */
+        .button-5 {
+            background-color: #2ecc71;
+            color: transparent;
+            font-family: 'Georgia', serif;
+            font-size: 20px;
+            background-clip: text;
+            text-fill-color: transparent;
+            background-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            animation: rainbow 5s infinite;
+        }
+
+        @keyframes rainbow {
+            0%, 100% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 100% 0;
+            }
+        }
+
+        /* Button 6: Bouncing */
+        .button-6 {
+            background-color: #f39c12;
+            color: white;
+            font-family: 'Lucida Console', monospace;
+            border-radius: 5px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Button 7: Circular Glowing */
+        .button-7 {
+            background-color: transparent;
+            color: #3498db;
+            font-family: 'Verdana', sans-serif;
+            border: 3px solid #3498db;
+            border-radius: 50%;
+            padding: 20px;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .button-7:hover {
+            box-shadow: 0 0 10px #3498db, 0 0 20px #3498db, 0 0 30px #3498db, 0 0 40px #3498db;
+        }
+
+        /* Button 8: Animated Background */
+        .button-8 {
+            background: linear-gradient(45deg, #ff6f61, #d75a4a);
+            background-size: 200% 200%;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            animation: gradient-move 4s ease infinite;
+            border-radius: 10px;
+        }
+
+        @keyframes gradient-move {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Button 9: Expanding Border */
+        .button-9 {
+            background-color: #e74c3c;
+            color: white;
+            font-family: 'Impact', sans-serif;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .button-9::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+            transform: scale(0);
+            transform-origin: center;
+        }
+
+        .button-9:hover::after {
+            transform: scale(1);
+        }
+
+        /* Button 10: Tilted */
+        .button-10 {
+            background-color: #1abc9c;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            transform: rotate(-10deg);
+            font-weight: bold;
+        }
+
+        .button-10:hover {
+            transform: rotate(10deg);
+        }
+
+        /* Button 11: Slide In Text */
+        .button-11 {
+            background-color: #34495e;
+            color: transparent;
+            font-family: 'Tahoma', sans-serif;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        .button-11 span {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 100%;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .button-11:hover span {
+            top: 0;
+        }
+
+        /* Button 12: Wave Effect */
+        .button-12 {
+            background-color: #2ecc71;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-12::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background-color: rgba(255, 255, 255, 0.15);
+            transition: all 0.5s ease;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        .button-12:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Button 13: Floating */
+        .button-13 {
+            background-color: #e67e22;
+            color: white;
+            font-family: 'Lucida Sans', sans-serif;
+            transition: transform 0.3s ease;
+            transform: translateY(0);
+        }
+
+        .button-13:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Button 14: Multi-Color Border */
+        .button-14 {
+            background-color: white;
+            color: #8e44ad;
+            font-family: 'Times New Roman', serif;
+            border: 5px solid transparent;
+            border-radius: 10px;
+            background-image: linear-gradient(white, white), linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+        }
+
+        /* Button 15: Circular Pulsing */
+        .button-15 {
+            background-color: #2c3e50;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+
+        /* Button 16: Glowing Text */
+        .button-16 {
+            background-color: #9b59b6;
+            color: white;
+            font-family: 'Verdana', sans-serif;
+            text-shadow: 0 0 10px white;
+        }
+
+        .button-16:hover {
+            text-shadow: 0 0 20px white, 0 0 30px #9b59b6, 0 0 40px #9b59b6;
+        }
+
+        /* Button 17: Spinning */
+        .button-17 {
+            background-color: #3498db;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .button-17:hover {
+            transform: rotate(360deg);
+        }
+
+        /* Button 18: Text Underline */
+        .button-18 {
+            background-color: #e74c3c;
+            color: white;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-18::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            transform: scaleX(0);
+            transition: all 0.3s ease;
+        }
+
+        .button-18:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Button 19: Text Flip */
+        .button-19 {
+            background-color: #1abc9c;
+            color: white;
+            font-family: 'Lucida Console', monospace;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .button-19 span {
+            display: inline-block;
+            transition: transform 0.5s;
+            transform-origin: top;
+        }
+
+        .button-19:hover span {
+            transform: rotateX(180deg);
+        }
+
+        /* Button 20: Embossed */
+        .button-20 {
+            background-color: #34495e;
+            color: white;
+            font-family: 'Geneva', sans-serif;
+            box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button 21: Tilted Text */
+        .button-21 {
+            background-color: #e74c3c;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            transform: skewX(-20deg);
+        }
+
+        .button-21 span {
+            display: inline-block;
+            transform: skewX(20deg);
+        }
+
+        /* Button 22: Shine Effect */
+        .button-22 {
+            background-color: #3498db;
+            color: white;
+            font-family: 'Verdana', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-22::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent 50%, rgba(255, 255, 255, 0.5) 50%);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .button-22:hover::after {
+            left: 100%;
+            top: 100%;
+        }
+
+        /* Button 23: Gradient Text */
+        .button-23 {
+            background-color: #2ecc71;
+            font-family: 'Georgia', serif;
+            background-clip: text;
+            color: transparent;
+            text-fill-color: transparent;
+            background-image: linear-gradient(45deg, #ff6f61, #d75a4a);
+        }
+
+        /* Button 24: Glow on Hover */
+        .button-24 {
+            background-color: #8e44ad;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .button-24:hover {
+            box-shadow: 0 0 20px #8e44ad, 0 0 30px #8e44ad, 0 0 40px #8e44ad;
+        }
+
+        /* Button 25: Zig-Zag Border */
+        .button-25 {
+            background-color: #2c3e50;
+            color: white;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            border: 4px solid white;
+            clip-path: polygon(0 0, 5% 15%, 10% 0, 15% 15%, 20% 0, 25% 15%, 30% 0, 35% 15%, 40% 0, 45% 15%, 50% 0, 55% 15%, 60% 0, 65% 15%, 70% 0, 75% 15%, 80% 0, 85% 15%, 90% 0, 95% 15%, 100% 0, 100% 100%, 95% 85%, 90% 100%, 85% 85%, 80% 100%, 75% 85%, 70% 100%, 65% 85%, 60% 100%, 55% 85%, 50% 100%, 45% 85%, 40% 100%, 35% 85%, 30% 100%, 25% 85%, 20% 100%, 15% 85%, 10% 100%, 5% 85%, 0 100%);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Danielilli Action Buttons</h1>
+
+    <div class="button-grid">
+        <button class="button button-1" onclick="showNotification('Button 1 Clicked!')">Button 1</button>
+        <button class="button button-2" onclick="showNotification('Button 2 Clicked!')">Button 2</button>
+        <button class="button button-3" onclick="showNotification('Button 3 Clicked!')">Button 3</button>
+        <button class="button button-4" onclick="showNotification('Button 4 Clicked!')">Button 4</button>
+        <button class="button button-5" onclick="showNotification('Button 5 Clicked!')">Button 5</button>
+        <button class="button button-6" onclick="showNotification('Button 6 Clicked!')">Button 6</button>
+        <button class="button button-7" onclick="showNotification('Button 7 Clicked!')">Button 7</button>
+        <button class="button button-8" onclick="showNotification('Button 8 Clicked!')">Button 8</button>
+        <button class="button button-9" onclick="showNotification('Button 9 Clicked!')">Button 9</button>
+        <button class="button button-10" onclick="showNotification('Button 10 Clicked!')">Button 10</button>
+        <button class="button button-11" onclick="showNotification('Button 11 Clicked!')"><span>Button 11</span></button>
+        <button class="button button-12" onclick="showNotification('Button 12 Clicked!')">Button 12</button>
+        <button class="button button-13" onclick="showNotification('Button 13 Clicked!')">Button 13</button>
+        <button class="button button-14" onclick="showNotification('Button 14 Clicked!')">Button 14</button>
+        <button class="button button-15" onclick="showNotification('Button 15 Clicked!')">B15</button>
+        <button class="button button-16" onclick="showNotification('Button 16 Clicked!')">Button 16</button>
+        <button class="button button-17" onclick="showNotification('Button 17 Clicked!')">Button 17</button>
+        <button class="button button-18" onclick="showNotification('Button 18 Clicked!')">Button 18</button>
+        <button class="button button-19" onclick="showNotification('Button 19 Clicked!')"><span>Button 19</span></button>
+        <button class="button button-20" onclick="showNotification('Button 20 Clicked!')">Button 20</button>
+        <button class="button button-21" onclick="showNotification('Button 21 Clicked!')"><span>Button 21</span></button>
+        <button class="button button-22" onclick="showNotification('Button 22 Clicked!')">Button 22</button>
+        <button class="button button-23" onclick="showNotification('Button 23 Clicked!')">Button 23</button>
+        <button class="button button-24" onclick="showNotification('Button 24 Clicked!')">Button 24</button>
+        <button class="button button-25" onclick="showNotification('Button 25 Clicked!')">Button 25</button>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script>
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.innerText = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
